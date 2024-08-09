@@ -2,19 +2,6 @@
 
 <?= $this->section('content'); ?>
 <div class="row">
-    <!-- Chart Kepuasan -->
-    <div class="col-12 mb-4">
-        <div class="card bg-light">
-            <div class="card-body">
-                <div class="card-title">Jumlah Survey Berdasarkan Kepuasan</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <canvas class="max-w-100" id="chart-pie-satisfaction"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Chart Jenis Kelamin -->
     <div class="col-sm-6 mb-4">
@@ -53,112 +40,92 @@
     </div>
 </div>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Chart Kepuasan
-        var ctxSatisfaction = document.getElementById('chart-pie-satisfaction').getContext('2d');
-        var satisfactionCounts = <?= json_encode($satisfactionCounts) ?>;
+    // Chart Jenis Kelamin
+    var ctxGender = document.getElementById('chart-pie-gender').getContext('2d');
+    var genderCounts = <?= json_encode($genderCounts) ?>;
 
-        new Chart(ctxSatisfaction, {
-            type: 'pie',
-            data: {
-                labels: ['Sangat Puas', 'Puas', 'Kurang Puas', 'Tidak Puas'],
-                datasets: [{
-                    label: 'Jumlah',
-                    data: [satisfactionCounts.sangat_puas, satisfactionCounts.puas, satisfactionCounts.kurang_puas, satisfactionCounts.tidak_puas],
-                    backgroundColor: ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384'],
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    var genderLabels = [];
+    var genderData = [];
 
-        // Chart Jenis Kelamin
-        var ctxGender = document.getElementById('chart-pie-gender').getContext('2d');
-        var genderCounts = <?= json_encode($genderCounts) ?>;
+    genderCounts.forEach(function(item) {
+        genderLabels.push(item.JK == 1 ? 'Laki-Laki' : 'Perempuan');
+        genderData.push(item.count);
+    });
 
-        var genderLabels = [];
-        var genderData = [];
+    new Chart(ctxGender, {
+        type: 'pie',
+        data: {
+            labels: genderLabels,
+            datasets: [{
+                label: 'Jumlah Responden',
+                data: genderData,
+                backgroundColor: ['#36a2eb', '#ff6384'],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 
-        genderCounts.forEach(function(item) {
-            genderLabels.push(item.JK == 1 ? 'Laki-Laki' : 'Perempuan');
-            genderData.push(item.count);
-        });
+    // Chart Pekerjaan
+    var ctxJob = document.getElementById('chart-pie-job').getContext('2d');
+    var jobCounts = <?= json_encode($jobCounts) ?>;
 
-        new Chart(ctxGender, {
-            type: 'pie',
-            data: {
-                labels: genderLabels,
-                datasets: [{
-                    label: 'Jumlah Responden',
-                    data: genderData,
-                    backgroundColor: ['#36a2eb', '#ff6384'],
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    var jobLabels = [];
+    var jobData = [];
 
-        // Chart Pekerjaan
-        var ctxJob = document.getElementById('chart-pie-job').getContext('2d');
-        var jobCounts = <?= json_encode($jobCounts) ?>;
+    jobCounts.forEach(function(item) {
+        jobLabels.push(item.pekerjaan);
+        jobData.push(item.count);
+    });
 
-        var jobLabels = [];
-        var jobData = [];
+    new Chart(ctxJob, {
+        type: 'pie',
+        data: {
+            labels: jobLabels,
+            datasets: [{
+                label: 'Jumlah Responden',
+                data: jobData,
+                backgroundColor: ['#ffcd56', '#ff6384', '#36a2eb', '#cc65fe', '#ff9f40'],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 
-        jobCounts.forEach(function(item) {
-            jobLabels.push(item.pekerjaan);
-            jobData.push(item.count);
-        });
+    // Chart Pendidikan
+    var ctxEducation = document.getElementById('chart-pie-education').getContext('2d');
+    var educationCounts = <?= json_encode($educationCounts) ?>;
 
-        new Chart(ctxJob, {
-            type: 'pie',
-            data: {
-                labels: jobLabels,
-                datasets: [{
-                    label: 'Jumlah Responden',
-                    data: jobData,
-                    backgroundColor: ['#ffcd56', '#ff6384', '#36a2eb', '#cc65fe', '#ff9f40'],
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    var educationLabels = [];
+    var educationData = [];
 
-        // Chart Pendidikan
-        var ctxEducation = document.getElementById('chart-pie-education').getContext('2d');
-        var educationCounts = <?= json_encode($educationCounts) ?>;
+    educationCounts.forEach(function(item) {
+        educationLabels.push(item.pendidikan);
+        educationData.push(item.count);
+    });
 
-        var educationLabels = [];
-        var educationData = [];
-
-        educationCounts.forEach(function(item) {
-            educationLabels.push(item.pendidikan);
-            educationData.push(item.count);
-        });
-
-        new Chart(ctxEducation, {
-            type: 'pie',
-            data: {
-                labels: educationLabels,
-                datasets: [{
-                    label: 'Jumlah Responden',
-                    data: educationData,
-                    backgroundColor: ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384', '#9966ff', '#ff9f40'],
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    new Chart(ctxEducation, {
+        type: 'pie',
+        data: {
+            labels: educationLabels,
+            datasets: [{
+                label: 'Jumlah Responden',
+                data: educationData,
+                backgroundColor: ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384', '#9966ff', '#ff9f40'],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
     });
 </script>
 

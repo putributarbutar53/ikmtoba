@@ -171,14 +171,44 @@ class Laporan extends BaseController
         $jobCounts = $this->model->countByJob();
         $educationCounts = $this->model->countEducation();
         $satisfactionCounts = $this->model->countSatisfaction();
+        $questionCounts = $this->model->countByQuestionWithOptions(); // Gunakan fungsi baru untuk menghitung jumlah jawaban berdasarkan pertanyaan dengan opsi
+
+        // Perbarui hasil dengan menambahkan kolom 'question' dari setiap pertanyaan
+        foreach ($questionCounts as &$question) {
+            $question['question'] = $this->model->getQuestionById($question['id_question']);
+        }
 
         $data = [
             'genderCounts' => $genderCounts,
             'jobCounts' => $jobCounts,
             'educationCounts' => $educationCounts,
             'satisfactionCounts' => $satisfactionCounts,
+            'questionCounts' => $questionCounts,
         ];
 
-        return view('admin/laporan/chart', $data); // Pastikan path view sesuai
+        return view('admin/laporan/chart', $data);
+    }
+    public function qst()
+    {
+        $genderCounts = $this->model->countByGender();
+        $jobCounts = $this->model->countByJob();
+        $educationCounts = $this->model->countEducation();
+        $satisfactionCounts = $this->model->countSatisfaction();
+        $questionCounts = $this->model->countByQuestionWithOptions(); // Gunakan fungsi baru untuk menghitung jumlah jawaban berdasarkan pertanyaan dengan opsi
+
+        // Perbarui hasil dengan menambahkan kolom 'question' dari setiap pertanyaan
+        foreach ($questionCounts as &$question) {
+            $question['question'] = $this->model->getQuestionById($question['id_question']);
+        }
+
+        $data = [
+            'genderCounts' => $genderCounts,
+            'jobCounts' => $jobCounts,
+            'educationCounts' => $educationCounts,
+            'satisfactionCounts' => $satisfactionCounts,
+            'questionCounts' => $questionCounts,
+        ];
+
+        return view('admin/laporan/qst', $data);
     }
 }

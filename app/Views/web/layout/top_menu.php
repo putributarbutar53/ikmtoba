@@ -38,6 +38,7 @@
                                          </li>
 
                                          <li><a href="<?= site_url('nilai') ?>">Nilai IKM</a></li>
+                                         <li><a href="<?= site_url('chart') ?>">Chart</a></li>
                                          <li><a href="<?= site_url('faq') ?>">Faq</a></li>
                                          <li><a href="<?= site_url('contact') ?>">Contact</a></li>
                                      </ul>

@@ -11,6 +11,7 @@ $routes->get('/nilai', 'Home::nilai');
 $routes->get('/faq', 'Home::faq');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/survey', 'Home::survey');
+$routes->get('/chart', 'Home::chart');
 $routes->get('/user', 'Home::user');
 
 $routes->add('admin2045/logout', 'admin2045\Login::logout');

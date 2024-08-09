@@ -56,6 +56,36 @@
                         </a>
                     </li>
                 </ul>
+                <hr class="navbar-vertical-hr my-2" />
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item<?php if (current_url() === site_url('admin2045/laporan/qst')) { ?> active<?php } ?>"><a class="nav-link" href="<?php echo site_url('admin2045/laporan/qst') ?>">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fas fa-chart-pie"></i></span><span class="nav-link-text">Charts Berdasarkan Pertanyaan</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <hr class="navbar-vertical-hr my-2" />
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item<?php if (current_url() === site_url('admin2045/pendidikan')) { ?> active<?php } ?>"><a class="nav-link" href="<?php echo site_url('admin2045/pendidikan') ?>">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fas fa-graduation-cap"></i></span><span class="nav-link-text">Pendidikan Terakhir</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item<?php if (current_url() === site_url('admin2045/pekerjaan')) { ?> active<?php } ?>"><a class="nav-link" href="<?php echo site_url('admin2045/pekerjaan') ?>">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fas fa-briefcase"></i></span><span class="nav-link-text">Pekerjaan</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item<?php if (current_url() === site_url('admin2045/layanan')) { ?> active<?php } ?>"><a class="nav-link" href="<?php echo site_url('admin2045/layanan') ?>">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fas fa-hands-helping"></i></span><span class="nav-link-text">Jenis Layanan</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
                 <div class="navbar-vertical-divider">
                     <hr class="navbar-vertical-hr my-2" />
                     <ul class="navbar-nav flex-column">

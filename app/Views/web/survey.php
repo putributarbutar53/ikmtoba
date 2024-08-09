@@ -182,13 +182,9 @@
                                                             <label for="pendidikan">Pendidikan</label>
                                                             <select name="pendidikan" id="pendidikan" class="custom-select">
                                                                 <option value="" disabled selected>Select Education</option>
-                                                                <option value="SD">SD</option>
-                                                                <option value="SMP">SMP</option>
-                                                                <option value="SMA">SMA</option>
-                                                                <option value="Diploma III">Diploma III</option>
-                                                                <option value="Diploma IV / Sarjana">Diploma IV / Sarjana</option>
-                                                                <option value="Magister">Magister</option>
-                                                                <option value="Doktor">Doktor</option>
+                                                                <?php foreach ($pendidikan as $item) : ?>
+                                                                    <option value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
+                                                                <?php endforeach; ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -197,11 +193,9 @@
                                                             <label for="pekerjaan">Pekerjaan</label>
                                                             <select name="pekerjaan" id="pekerjaan" class="custom-select">
                                                                 <option value="" disabled selected>Pilih Pekerjaan</option>
-                                                                <option value="Pelajar">Pelajar</option>
-                                                                <option value="Karyawan">Karyawan</option>
-                                                                <option value="Wiraswasta">Wiraswasta</option>
-                                                                <option value="Pegawai Pemerintah">Pegawai Pemerintah</option>
-                                                                <option value="Tidak Bekerja">Tidak Bekerja</option>
+                                                                <?php foreach ($pekerjaan as $item) : ?>
+                                                                    <option value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
+                                                                <?php endforeach; ?>
                                                                 <option value="Lainnya">Lainnya</option>
 
                                                             </select>
@@ -210,10 +204,9 @@
                                                             <label for="jenis_layanan">Jenis Layanan</label>
                                                             <select name="jenis_layanan" id="jenis_layanan" class="custom-select">
                                                                 <option value="" disabled selected>Pilih Jenis Layanan</option>
-                                                                <option value="Kesehatan">Kesehatan</option>
-                                                                <option value="Pendidikan">Pendidikan</option>
-                                                                <option value="Administrasi Publik">Administrasi Publik</option>
-                                                                <option value="Transportasi">Transportasi</option>
+                                                                <?php foreach ($layanan as $item) : ?>
+                                                                    <option value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
+                                                                <?php endforeach; ?>
                                                                 <option value="Lainnya">Lainnya</option>
 
                                                             </select>

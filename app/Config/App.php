@@ -20,9 +20,9 @@ class App extends BaseConfig
 
     public function __construct()
     {
-        if(!empty($_SERVER['HTTP_HOST']))
-        $this->baseURL = getenv('http.type') . $_SERVER['HTTP_HOST'];
-        else $this->baseURL = 'http://localhost:8080/';
+        if (!empty($_SERVER['HTTP_HOST']))
+            $this->baseURL = getenv('http.type') . $_SERVER['HTTP_HOST'];
+        else $this->baseURL = 'http://8.215.2.254';
     }
 
 

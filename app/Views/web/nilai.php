@@ -3,62 +3,6 @@
 
 <?php $this->section('content') ?>
 
-<!-- Testimonial inner 1 area start -->
-<section class="tp-testimonial-inner-1-area pt-160 pb-160" data-background="<?= base_url() ?>/lapor/img/testimonial/testi-inr-1-bg.jpg">
-  <div class="container">
-    <div class="row align-items-center mb-50">
-      <div class="col-xl-6 col-lg-7 col-md-8">
-        <h2>
-          Apa kata masyarakat Toba? <br>
-          Terkait Pelayanan Pemkab Toba
-        </h2>
-      </div>
-      <div class="col-xl-6 col-lg-5 col-md-4">
-        <div class="tp-testimonial-inner2-arrow-box d-flex justify-content-end">
-          <button class="slider-prev" tabindex="0" aria-label="Previous slide">
-            <i class="fa-regular fa-arrow-left"></i>
-          </button>
-          <button class="slider-next" tabindex="0" aria-label="Next slide">
-            <i class="fa-regular fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row align-items-center">
-      <div class="col-xl-5 col-lg-4">
-        <div class="tp-testimonial-inner-1-thumb">
-          <img src="<?= base_url() ?>/lapor/img/testimonial/conversation.png" alt="" style="width: 100%;" height="400px">
-        </div>
-      </div>
-
-      <div class="col-xl-6 col-lg-7">
-        <div class="row">
-          <div class="col-xxl-12">
-            <div class="tp-testimonial-inner-slider p-relative wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1.2s">
-              <div class="tp-testimonial-inner-slider-active swiper-container">
-                <div class="swiper-wrapper">
-                  <?php foreach ($data as $row) : ?>
-                    <div class="tp-testimonial-inner-1-item swiper-slide">
-                      <div class="tp-testimonial-inner-1-content">
-                        <p>“<?= $row['saran'] ?>”</p>
-                        <div class="tp-testimonial-inner-1-details">
-                          <h4><?= $row['nama'] ?></h4>
-                          <p><?= $row['pekerjaan'] ?></p>
-                        </div>
-                      </div>
-                    </div>
-                  <?php endforeach; ?>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-1"></div>
-    </div>
-  </div>
-</section>
-<!-- Testimonial inner 1 area end -->
 
 <!-- Indek Kepuasan Masyarakat (IKM) area start -->
 <section class="tp-testimonial-3-area pt-115 pb-90">
@@ -66,7 +10,7 @@
     <div class="row">
       <div class="tp-section-title-wrapper mb-50 text-center wow fadeInUp">
         <span class="tp-section-subtitle tp-section-subtitle-3">Indek Kepuasan Masyarakat (IKM)</span>
-        <h5 class="tp-section-title style-2">Nilai IKM<br>Pemerintah Kabupaten Toba</h5>
+        <h5 class="tp-section-title style-2">Nilai IKM<br> Pemerintah Kabupaten Toba</h5>
       </div>
     </div>
     <div class="row">
@@ -108,52 +52,56 @@
               <br>
               <h6 class="card-title">Tabel Indeks Kepuasan Masyarakat (IKM) Toba</h6>
               <br>
+              <form method="get" action="" style="margin-top: -20px;">
+                <label for="tahun" style="font-weight: bold; margin-right: 10px;">Pilih Tahun:</label>
+                <select name="tahun" id="tahun" onchange="this.form.submit()" style="padding: 8px 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; outline: none; transition: border-color 0.3s;">
+                  <?php for ($year = date('Y'); $year >= 2023; $year--) : ?>
+                    <option value="<?= $year ?>" <?= (isset($_GET['tahun']) && $_GET['tahun'] == $year) ? 'selected' : '' ?>><?= $year ?></option>
+                  <?php endfor; ?>
+                </select>
+              </form>
+              <br>
               <div class="table-responsive">
-                <table class="table" style="border-collapse: collapse;">
+                <table class="table" border="1" style="overflow-x: auto;">
                   <thead>
                     <tr>
                       <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black;">Bulan</th>
-                      <th colspan="3" style="text-align: center; vertical-align: middle; border: 1px solid black;">Pendidikan</th>
-                      <th colspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black;">Nilai</th>
+                      <th colspan="<?= count($pendidikan) ?>" style="text-align: center; vertical-align: middle; border: 1px solid black;">Pendidikan</th>
                       <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black;">Total</th>
+                      <th colspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black;">Nilai</th>
                     </tr>
                     <tr>
-                      <th style="text-align: center; vertical-align: middle; border: 1px solid black;">SD</th>
-                      <th style="text-align: center; vertical-align: middle; border: 1px solid black;">SMP</th>
-                      <th style="text-align: center; vertical-align: middle; border: 1px solid black;">SMA</th>
+                      <?php foreach ($pendidikan as $row) : ?>
+                        <th style="text-align: center; vertical-align: middle; border: 1px solid black;"><?= $row['name'] ?></th>
+                      <?php endforeach; ?>
                       <th style="text-align: center; vertical-align: middle; border: 1px solid black;">Indeks</th>
                       <th style="text-align: center; vertical-align: middle; border: 1px solid black;">Ket.</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" style="text-align: center; vertical-align: middle; border: 1px solid black;">Januari</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">10</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">15</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">20</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">5</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">Puas</td>
-                      <td rowspan="3" style="text-align: center; vertical-align: middle; border: 1px solid black;">45</td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">5</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">10</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">15</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">3</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">Tidak Puas</td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">15</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">20</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">25</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">8</td>
-                      <td style="text-align: center; vertical-align: middle; border: 1px solid black;">Kurang Puas</td>
-                    </tr>
+                  <tbody id="table-body">
+                    <?php foreach ($bulan as $bln) : ?>
+                      <tr>
+                        <td style="text-align: center; vertical-align: middle; border: 1px solid black;"><?= $bln ?></td>
+                        <?php foreach ($pendidikan as $pend) : ?>
+                          <td style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                            <?= isset($jumlahResponden[$bln][$pend['name']]) ? $jumlahResponden[$bln][$pend['name']] : 0 ?>
+                          </td>
+                        <?php endforeach; ?>
+                        <td style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                          <?= isset($totalRespondenPerBulan[$bln]) ? $totalRespondenPerBulan[$bln] : 0 ?>
+                        </td>
+                        <td style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                          <?= isset($indeksKepuasanPerBulan[$bln]) && $indeksKepuasanPerBulan[$bln] > 0 ? number_format($indeksKepuasanPerBulan[$bln], 2) : '' ?>
+                        </td>
+                        <td style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                          <?= isset($keteranganPerBulan[$bln]) && $keteranganPerBulan[$bln] != 'Tidak Baik' ? $keteranganPerBulan[$bln] : '' ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
                   </tbody>
-
                 </table>
-
               </div>
+
             </div>
           </div>
         </div>
@@ -161,9 +109,6 @@
     </div>
   </div>
 </section>
-
-
-
 <section class="tp-chose-us-5-area pt-115 pb-130 p-relative" data-background="<?= base_url() ?>/lapor/img/chose-us/chose-us-5-bg.jpg">
   <div class="tp-chose-us-5-bg-shape">
     <img class="tp-chose-us-5-bg-shape1" src="<?= base_url() ?>/lapor/img/chose-us/chose-us-5-shape1.png" alt="">
@@ -246,13 +191,70 @@
 </section>
 <!-- Indek Kepuasan Masyarakat (IKM) area end -->
 
+<!-- Testimonial inner 1 area start -->
+<section class="tp-testimonial-inner-1-area pt-160 pb-160" data-background="<?= base_url() ?>/lapor/img/testimonial/testi-inr-1-bg.jpg">
+  <div class="container">
+    <div class="row align-items-center mb-50">
+      <div class="col-xl-6 col-lg-7 col-md-8">
+        <h2>
+          Apa kata masyarakat Toba? <br>
+          Terkait Pelayanan Pemkab Toba
+        </h2>
+      </div>
+      <div class="col-xl-6 col-lg-5 col-md-4">
+        <div class="tp-testimonial-inner2-arrow-box d-flex justify-content-end">
+          <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+            <i class="fa-regular fa-arrow-left"></i>
+          </button>
+          <button class="slider-next" tabindex="0" aria-label="Next slide">
+            <i class="fa-regular fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-xl-5 col-lg-4">
+        <div class="tp-testimonial-inner-1-thumb">
+          <img src="<?= base_url() ?>/lapor/img/testimonial/conversation.png" alt="" style="width: 100%;" height="400px">
+        </div>
+      </div>
+
+      <div class="col-xl-6 col-lg-7">
+        <div class="row">
+          <div class="col-xxl-12">
+            <div class="tp-testimonial-inner-slider p-relative wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1.2s">
+              <div class="tp-testimonial-inner-slider-active swiper-container">
+                <div class="swiper-wrapper">
+                  <?php foreach ($data as $row) : ?>
+                    <div class="tp-testimonial-inner-1-item swiper-slide">
+                      <div class="tp-testimonial-inner-1-content">
+                        <p>“<?= $row['saran'] ?>”</p>
+                        <div class="tp-testimonial-inner-1-details">
+                          <h4><?= $row['nama'] ?></h4>
+                          <p><?= $row['pekerjaan'] ?></p>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-1"></div>
+    </div>
+  </div>
+</section>
+<!-- Testimonial inner 1 area end -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   // Data for Gender Chart
   const genderData = {
-    labels: ['Semua', 'Perempuan', 'Laki-Laki'],
+    labels: ['Perempuan', 'Laki-Laki'],
     datasets: [{
-      data: [<?= $countPR + $countJK ?>, <?= $countPR ?>, <?= $countJK ?>],
+      data: [<?= $countPR ?>, <?= $countJK ?>],
       backgroundColor: ['#36a2eb', '#ff6384', '#ffce56'],
       hoverBackgroundColor: ['#36a2eb', '#ff6384', '#ffce56']
     }]
@@ -320,5 +322,6 @@
     educationConfig
   );
 </script>
+
 
 <?php $this->endsection() ?>

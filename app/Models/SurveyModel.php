@@ -154,4 +154,74 @@ class SurveyModel extends Model
 
         return $query->getRowArray();
     }
+
+    public function getDistinctEducations()
+    {
+        // Ambil nilai unik dari kolom pendidikan
+        $distinctEducations = $this->db->table($this->table)
+            ->distinct()
+            ->select('pendidikan')
+            ->get()
+            ->getResultArray();
+
+        return $distinctEducations;
+    }
+
+    public function countByQuestionWithOptions()
+    {
+        // Lakukan query untuk menghitung jumlah jawaban berdasarkan pertanyaan (id_question) dan ambil opsi dan pertanyaan dari tb_question
+        $query = $this->db->query("
+        SELECT q.id AS question_id,
+               q.question,  -- tambahkan kolom pertanyaan di sini
+               q.option1 AS option1_name,
+               q.option2 AS option2_name,
+               q.option3 AS option3_name,
+               q.option4 AS option4_name,
+               s.id_question,
+               SUM(s.option1) as count_option1,
+               SUM(s.option2) as count_option2,
+               SUM(s.option3) as count_option3,
+               SUM(s.option4) as count_option4
+        FROM tb_survey s
+        JOIN tb_question q ON s.id_question = q.id
+        GROUP BY s.id_question
+    ");
+
+        return $query->getResultArray();
+    }
+    public function getQuestionById($id)
+    {
+        // Ambil pertanyaan dari tabel tb_question berdasarkan ID
+        $query = $this->db->query("SELECT question FROM tb_question WHERE id = $id");
+        $result = $query->getRow();
+
+        // Pastikan query berhasil dan ada hasil
+        if ($result) {
+            return $result->question;
+        } else {
+            return null; // Atau sesuaikan dengan penanganan kesalahan Anda
+        }
+    }
+    public function countResponden($bulan, $pendidikan, $tahun)
+    {
+        // Menghitung jumlah responden berdasarkan bulan dan jenis pendidikan
+        $this->select('COUNT(*) as jumlah');
+        $this->where('MONTH(created_at)', $bulan);
+        $this->where('YEAR(created_at)', $tahun);
+        $this->where('pendidikan', $pendidikan);
+        $this->groupBy('nik, created_at'); // Mengelompokkan berdasarkan kombinasi nik dan created_at
+        $result = $this->countAllResults('tb_survey');
+
+        // Mengembalikan jumlah responden
+        return $result;
+    }
+    public function getIndeksKepuasan($bulan, $tahun)
+    {
+        return $this->db->table('tb_survey')
+            ->select('(SUM(option1) + SUM(option2) * 2 + SUM(option3) * 3 + SUM(option4) * 4) / (COUNT(DISTINCT id_question) * 4 * COUNT(DISTINCT CONCAT(nik, created_at))) * 100 AS indeks_kepuasan')
+            ->where('MONTH(created_at)', $bulan)
+            ->where('YEAR(created_at)', $tahun)
+            ->get()
+            ->getRowArray();
+    }
 }
