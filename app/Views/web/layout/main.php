@@ -157,8 +157,8 @@
 
     <!-- JS here -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?= base_url() ?>/lapor/js/vendor/jquery.js"></script>
-    <script src="<?= base_url() ?>/lapor/js/vendor/waypoints.js"></script>
+    <script src="<?= base_url() ?>/lapor/js/vendors/jquery.js"></script>
+    <script src="<?= base_url() ?>/lapor/js/vendors/waypoints.js"></script>
     <script src="<?= base_url() ?>/lapor/js/bootstrap-bundle.js"></script>
     <script src="<?= base_url() ?>/lapor/js/swiper-bundle.js"></script>
     <script src="<?= base_url() ?>/lapor/js/slick.js"></script>
