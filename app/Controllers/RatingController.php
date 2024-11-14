@@ -9,11 +9,11 @@ class RatingController extends BaseController
 {
     public function save()
     {
-        $rating = $this->request->getPost('rating');
+        $rating = $this->request->getPost('rating');  // Mendapatkan input rating dari request
 
         $ratingModel = new RatingModel();
         $data = [
-            'rating_value' => $rating
+            'rating' => $rating  // Ubah 'rating_value' menjadi 'rating' agar sesuai dengan model
         ];
 
         if ($ratingModel->save($data)) {

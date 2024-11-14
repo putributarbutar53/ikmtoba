@@ -22,6 +22,6 @@ $routes->group('admin2045', ['filter' => 'noadmin'], function ($routes) {
     $routes->add('login', 'admin2045\Login::login');
     $routes->add('lupapassword', 'admin2045\Login::lupapassword');
     $routes->add('resetpassword', 'admin2045\Login::resetpassword');
-    $routes->get('/', 'HomeController::index');
+   
     
 });

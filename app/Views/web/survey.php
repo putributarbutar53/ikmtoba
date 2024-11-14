@@ -124,7 +124,7 @@
     <div class="container">
         <div class="row">
             <div class="tp-section-title-wrapper mb-45 text-center wow fadeInUp">
-                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Pelayanan (SKP)</h3>
+                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Pelayanan Diskominfo Tobagi (SKP)</h3>
                 <p class="tp-team-section-paragraph">SKP ini menjadi indikator untuk melihat kepuasan Pelayanan dalam menerima layanan Pemerintah Kabupaten Toba</p>
             </div>
         </div>
@@ -260,7 +260,66 @@
                                                     <button class="tp-btn" type="reset">
                                                         <span> <i class="fas fa-undo"></i>&nbsp;&nbsp;Reset</span>
                                                     </button>
+                                                  <!-- Rating Section -->
+                    <div class="rating-container" style="margin-top: 30px;">
+                        <div id="star-rating">
+                            <span class="fa fa-star star" id="star-1" data-value="1"></span>
+                            <span class="fa fa-star star" id="star-2" data-value="2"></span>
+                            <span class="fa fa-star star" id="star-3" data-value="3"></span>
+                            <span class="fa fa-star star" id="star-4" data-value="4"></span>
+                            <span class="fa fa-star star" id="star-5" data-value="5"></span>
+                        </div>
+                        <p id="rating-result" style="margin-top: 10px;"></p>
+                    </div>
 
+                    <!-- CSS Styles -->
+                    <style>
+                        .star {
+                            font-size: 24px; /* Adjust the size as needed */
+                            color: gray; /* Default color for stars */
+                            cursor: pointer; /* Change cursor to pointer on hover */
+                        }
+
+                        .star.checked {
+                            color: gold; /* Color when star is checked */
+                        }
+                    </style>
+
+                    <!-- jQuery for star rating -->
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            // Handle star click event
+                            $(".star").on("click", function() {
+                                var ratingValue = $(this).data('value');
+                                // Set all stars to unchecked
+                                $(".star").removeClass("checked");
+                                // Set stars up to the clicked one to checked
+                                for (var i = 1; i <= ratingValue; i++) {
+                                    $("#star-" + i).addClass("checked");
+                                }
+                                // Display selected rating
+                                $("#rating-result").text("Anda memberi rating: " + ratingValue);
+
+                                // Send the rating to the server using AJAX
+                                $.ajax({
+                                    url: "<?= base_url('ratingcontroller/save') ?>",
+                                    method: "POST",
+                                    data: { rating: ratingValue },
+                                    success: function(response) {
+                                        if (response.status === 'success') {
+                                            alert("Rating berhasil disimpan!");
+                                        } else {
+                                            alert("Gagal menyimpan rating.");
+                                        }
+                                    },
+                                    error: function() {
+                                        alert("Terjadi kesalahan. Silakan coba lagi.");
+                                    }
+                                });
+                            });
+                        });
+                    </script>
                                                 </div>
                                                 <p class="ajax-response"></p>
                                             </div>
