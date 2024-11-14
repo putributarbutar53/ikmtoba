@@ -27,36 +27,15 @@
     <div class="card-body pt-0">
         <div class="container">
             <div class="row">
-                <!-- Rating 1 -->
+                <!-- Rating 5 -->
                 <div class="col-12 d-flex align-items-center">
-                    <div class="raty" data-options='{"readOnly":true,"score":1}'></div>
+                    <div class="raty" data-options='{"readOnly":true,"score":5}'></div>
                     <span class="ml-2">
-                        <span id="rating-1-count">
-                            <?= isset($ratingCounts[1]) ? $ratingCounts[1] : 0 ?>
+                        <span id="rating-5-count">
+                            <?= isset($ratingCounts[5]) ? $ratingCounts[5] : 0 ?>
                         </span> orang
                     </span>
                 </div>
-
-                <!-- Rating 2 -->
-                <div class="col-12 d-flex align-items-center">
-                    <div class="raty" data-options='{"readOnly":true,"score":2}'></div>
-                    <span class="ml-2">
-                        <span id="rating-2-count">
-                            <?= isset($ratingCounts[2]) ? $ratingCounts[2] : 0 ?>
-                        </span> orang
-                    </span>
-                </div>
-
-                <!-- Rating 3 -->
-                <div class="col-12 d-flex align-items-center">
-                    <div class="raty" data-options='{"readOnly":true,"score":3}'></div>
-                    <span class="ml-2">
-                        <span id="rating-3-count">
-                            <?= isset($ratingCounts[3]) ? $ratingCounts[3] : 0 ?>
-                        </span> orang
-                    </span>
-                </div>
-
                 <!-- Rating 4 -->
                 <div class="col-12 d-flex align-items-center">
                     <div class="raty" data-options='{"readOnly":true,"score":4}'></div>
@@ -66,13 +45,30 @@
                         </span> orang
                     </span>
                 </div>
-
-                <!-- Rating 5 -->
+                <!-- Rating 3 -->
                 <div class="col-12 d-flex align-items-center">
-                    <div class="raty" data-options='{"readOnly":true,"score":5}'></div>
+                    <div class="raty" data-options='{"readOnly":true,"score":3}'></div>
                     <span class="ml-2">
-                        <span id="rating-5-count">
-                            <?= isset($ratingCounts[5]) ? $ratingCounts[5] : 0 ?>
+                        <span id="rating-3-count">
+                            <?= isset($ratingCounts[3]) ? $ratingCounts[3] : 0 ?>
+                        </span> orang
+                    </span>
+                </div>
+                <!-- Rating 2 -->
+                <div class="col-12 d-flex align-items-center">
+                    <div class="raty" data-options='{"readOnly":true,"score":2}'></div>
+                    <span class="ml-2">
+                        <span id="rating-2-count">
+                            <?= isset($ratingCounts[2]) ? $ratingCounts[2] : 0 ?>
+                        </span> orang
+                    </span>
+                </div>
+                <!-- Rating 1 -->
+                <div class="col-12 d-flex align-items-center">
+                    <div class="raty" data-options='{"readOnly":true,"score":1}'></div>
+                    <span class="ml-2">
+                        <span id="rating-1-count">
+                            <?= isset($ratingCounts[1]) ? $ratingCounts[1] : 0 ?>
                         </span> orang
                     </span>
                 </div>
