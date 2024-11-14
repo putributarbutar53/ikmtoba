@@ -124,8 +124,8 @@
     <div class="container">
         <div class="row">
             <div class="tp-section-title-wrapper mb-45 text-center wow fadeInUp">
-                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Masyarakat (SKM)</h3>
-                <p class="tp-team-section-paragraph">SKM ini menjadi indikator untuk melihat kepuasan masyarakat dalam menerima layanan Pemerintah Kabupaten Toba</p>
+                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Pelayanan (SKP)</h3>
+                <p class="tp-team-section-paragraph">SKP ini menjadi indikator untuk melihat kepuasan Pelayanan dalam menerima layanan Pemerintah Kabupaten Toba</p>
             </div>
         </div>
         <div class="row">

@@ -193,4 +193,5 @@ class Home extends BaseController
 
         return view('web/chart', $data);
     }
+    
 }

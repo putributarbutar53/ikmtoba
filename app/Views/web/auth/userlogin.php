@@ -17,6 +17,7 @@
               <use xlink:href="#gentle-wave" x="48" y="3" />
               <use xlink:href="#gentle-wave" x="48" y="5" />
               <use xlink:href="#gentle-wave" x="48" y="7" />
+              <use rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           </g>
       </svg>
   </section>

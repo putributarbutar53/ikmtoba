@@ -9,8 +9,8 @@
   <div class="container">
     <div class="row">
       <div class="tp-section-title-wrapper mb-50 text-center wow fadeInUp">
-        <span class="tp-section-subtitle tp-section-subtitle-3">Indek Kepuasan Masyarakat (IKM)</span>
-        <h5 class="tp-section-title style-2">Nilai IKM<br> Pemerintah Kabupaten Toba</h5>
+        <span class="tp-section-subtitle tp-section-subtitle-3">Indek Kepuasan Pelayanan (IKP)</span>
+        <h5 class="tp-section-title style-2">Nilai IKP<br> Pemerintah Kabupaten Toba</h5>
       </div>
     </div>
     <div class="row">
@@ -21,7 +21,7 @@
               <div class="tp-testimonial-3-member d-flex">
                 <div class="tp-testimonial-3-img-content">
                   <h4>Rekapitulasi</h4>
-                  <p>Survey Kepuasan Masyarakat (SKM) Kab. Toba</p>
+                  <p>Survey Kepuasan Pelayanan (SKP) Kab. Toba</p>
                 </div>
               </div>
               <div class="tp-testimonial-3-member-icon">
@@ -50,7 +50,7 @@
               </div>
               <!-- Tabel -->
               <br>
-              <h6 class="card-title">Tabel Indeks Kepuasan Masyarakat (IKM) Toba</h6>
+              <h6 class="card-title">Tabel Indeks Kepuasan Pelayanan (IKP) Toba</h6>
               <br>
               <form method="get" action="" style="margin-top: -20px;">
                 <label for="tahun" style="font-weight: bold; margin-right: 10px;">Pilih Tahun:</label>

@@ -13,6 +13,7 @@ $routes->get('/contact', 'Home::contact');
 $routes->get('/survey', 'Home::survey');
 $routes->get('/chart', 'Home::chart');
 $routes->get('/user', 'Home::user');
+$routes->post('rating/save', 'RatingController::save');
 
 $routes->add('admin2045/logout', 'admin2045\Login::logout');
 
@@ -21,4 +22,6 @@ $routes->group('admin2045', ['filter' => 'noadmin'], function ($routes) {
     $routes->add('login', 'admin2045\Login::login');
     $routes->add('lupapassword', 'admin2045\Login::lupapassword');
     $routes->add('resetpassword', 'admin2045\Login::resetpassword');
+    $routes->get('/', 'HomeController::index');
+    
 });

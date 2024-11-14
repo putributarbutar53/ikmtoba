@@ -1,5 +1,5 @@
 <!-- home.php -->
-<!-- <?php $this->extend('web/layout/main') ?> -->
+<?php $this->extend('web/layout/main') ?>
 
 <?php $this->section('content') ?>
 
@@ -35,36 +35,36 @@
                             <div class="accordion-item tp-faq-inr-pg-accordion-item">
                                 <h2 class="accordion-header" id="faq_one">
                                     <button class="accordion-button tp-faq-inr-pg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_collapse_one" aria-expanded="true" aria-controls="faq_collapse_one">
-                                        Apa itu Survey Kepuasan Masyarakat (SKM)?
+                                        Apa itu Survey Kepuasan Pelayanan (SKP)?
                                     </button>
                                 </h2>
                                 <div id="faq_collapse_one" class="accordion-collapse collapse show" aria-labelledby="faq_one" data-bs-parent="#general_faqaccordion">
                                     <div class="accordion-body tp-faq-inr-pg-accordion-body">
-                                        <p>Survey Kepuasan Masyarakat (SKM) adalah alat yang digunakan untuk mengukur tingkat kepuasan masyarakat terhadap layanan yang diberikan oleh Pemerintah Kabupaten Toba.</p>
+                                        <p>Survey Kepuasan Pelayanan (SKP) adalah alat yang digunakan untuk mengukur tingkat kepuasan masyarakat terhadap layanan yang diberikan oleh Pemerintah Kabupaten Toba.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item tp-faq-inr-pg-accordion-item">
                                 <h2 class="accordion-header" id="faq_two">
                                     <button class="accordion-button collapsed tp-faq-inr-pg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_collapse_two" aria-expanded="false" aria-controls="faq_collapse_two">
-                                        Bagaimana cara saya mengisi SKM?
+                                        Bagaimana cara saya mengisi SKP?
                                     </button>
                                 </h2>
                                 <div id="faq_collapse_two" class="accordion-collapse collapse" aria-labelledby="faq_two" data-bs-parent="#general_faqaccordion">
                                     <div class="accordion-body tp-faq-inr-pg-accordion-body">
-                                        <p>Anda dapat mengisi SKM melalui situs web ini dengan mengikuti tautan yang telah disediakan. Pastikan Anda mengisi semua kolom yang diperlukan dengan informasi yang akurat.</p>
+                                        <p>Anda dapat mengisi SKP melalui situs web ini dengan mengikuti tautan yang telah disediakan. Pastikan Anda mengisi semua kolom yang diperlukan dengan informasi yang akurat.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item tp-faq-inr-pg-accordion-item">
                                 <h2 class="accordion-header" id="faq_three">
                                     <button class="accordion-button collapsed tp-faq-inr-pg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_collapse_three" aria-expanded="false" aria-controls="faq_collapse_three">
-                                        Apa manfaat dari mengikuti SKM?
+                                        Apa manfaat dari mengikuti SKP?
                                     </button>
                                 </h2>
                                 <div id="faq_collapse_three" class="accordion-collapse collapse" aria-labelledby="faq_three" data-bs-parent="#general_faqaccordion">
                                     <div class="accordion-body tp-faq-inr-pg-accordion-body">
-                                        <p>Dengan mengikuti SKM, Anda membantu Pemerintah Kabupaten Toba untuk memahami dan meningkatkan kualitas layanan publik yang diberikan. Masukan Anda sangat berharga untuk perbaikan berkelanjutan.</p>
+                                        <p>Dengan mengikuti SKP, Anda membantu Pemerintah Kabupaten Toba untuk memahami dan meningkatkan kualitas layanan publik yang diberikan. Masukan Anda sangat berharga untuk perbaikan berkelanjutan.</p>
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +83,12 @@
                             <div class="accordion-item tp-faq-inr-pg-accordion-item">
                                 <h2 class="accordion-header" id="faq_five">
                                     <button class="accordion-button collapsed tp-faq-inr-pg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_collapse_five" aria-expanded="false" aria-controls="faq_collapse_five">
-                                        Bagaimana saya bisa mendapatkan hasil SKM?
+                                        Bagaimana saya bisa mendapatkan hasil SKP?
                                     </button>
                                 </h2>
                                 <div id="faq_collapse_five" class="accordion-collapse collapse" aria-labelledby="faq_five" data-bs-parent="#general_faqaccordion">
                                     <div class="accordion-body tp-faq-inr-pg-accordion-body">
-                                        <p>Hasil dari SKM akan dipublikasikan di situs web ini setelah analisis selesai dilakukan. Anda bisa memeriksa bagian hasil survei untuk informasi lebih lanjut.</p>
+                                        <p>Hasil dari SKP akan dipublikasikan di situs web ini setelah analisis selesai dilakukan. Anda bisa memeriksa bagian hasil survei untuk informasi lebih lanjut.</p>
                                     </div>
                                 </div>
                             </div>
@@ -106,10 +106,71 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Rating Section -->
+                    <div class="rating-container" style="margin-top: 30px;">
+                        <div id="star-rating">
+                            <span class="fa fa-star star" id="star-1" data-value="1"></span>
+                            <span class="fa fa-star star" id="star-2" data-value="2"></span>
+                            <span class="fa fa-star star" id="star-3" data-value="3"></span>
+                            <span class="fa fa-star star" id="star-4" data-value="4"></span>
+                            <span class="fa fa-star star" id="star-5" data-value="5"></span>
+                        </div>
+                        <p id="rating-result" style="margin-top: 10px;"></p>
+                    </div>
+
+                    <!-- CSS Styles -->
+                    <style>
+                        .star {
+                            font-size: 24px; /* Adjust the size as needed */
+                            color: gray; /* Default color for stars */
+                            cursor: pointer; /* Change cursor to pointer on hover */
+                        }
+
+                        .star.checked {
+                            color: gold; /* Color when star is checked */
+                        }
+                    </style>
+
+                    <!-- jQuery for star rating -->
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            // Handle star click event
+                            $(".star").on("click", function() {
+                                var ratingValue = $(this).data('value');
+                                // Set all stars to unchecked
+                                $(".star").removeClass("checked");
+                                // Set stars up to the clicked one to checked
+                                for (var i = 1; i <= ratingValue; i++) {
+                                    $("#star-" + i).addClass("checked");
+                                }
+                                // Display selected rating
+                                $("#rating-result").text("Anda memberi rating: " + ratingValue);
+
+                                // Send the rating to the server using AJAX
+                                $.ajax({
+                                    url: "<?= base_url('ratingcontroller/save') ?>",
+                                    method: "POST",
+                                    data: { rating: ratingValue },
+                                    success: function(response) {
+                                        if (response.status === 'success') {
+                                            alert("Rating berhasil disimpan!");
+                                        } else {
+                                            alert("Gagal menyimpan rating.");
+                                        }
+                                    },
+                                    error: function() {
+                                        alert("Terjadi kesalahan. Silakan coba lagi.");
+                                    }
+                                });
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php $this->endsection() ?>
+<?php $this->endSection() ?>
