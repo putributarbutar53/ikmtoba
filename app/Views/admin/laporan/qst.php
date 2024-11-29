@@ -15,125 +15,138 @@
 </div>
 <div class="row">
     <!-- Chart Kepuasan -->
-    <div class="col-6 mb-4">
-        <div class="card bg-light">
+    <div class="col-md-6 mb-4">
+        <div class="card bg-light h-100">
             <div class="card-body">
-                <div class="card-title">Jumlah Survey Berdasarkan Kepuasan</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <canvas class="max-w-100" id="chart-pie-satisfaction"></canvas>
+                <p class="card-title text-center font-weight-bold small" style="font-size: 0.875rem;">Jumlah Survey Berdasarkan Kepuasan</p>
+                <div class="d-flex flex-wrap align-items-center">
+                    <!-- Chart -->
+                    <div class="flex-grow-1">
+                        <canvas id="chart-pie-satisfaction"></canvas>
+                    </div>
+                    <!-- Legend langsung di kanan chart -->
+                    <div class="ml-4">
+                        <ul id="satisfaction-legend" class="list-unstyled"></ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Loop untuk setiap pertanyaan -->
     <?php foreach ($questionCounts as $question) : ?>
-        <div class="col-sm-6 mb-4">
-            <div class="card bg-light">
+        <div class="col-md-6 mb-4">
+            <div class="card bg-light h-100">
                 <div class="card-body">
-                    <p class="card-text" style="margin-top: -18px;">
-                        <?= $question['question'] ?>
-                    </p>
-                    <p class="card-text">
-                        <canvas class="max-w-100" id="chart-pie-question-<?= $question['id_question'] ?>"></canvas>
-                    </p>
+                    <p class="card-title text-center font-weight-bold small" style="font-size: 0.875rem;">Pertanyaan: <?= $question['question'] ?></p>
+                    <div class="d-flex flex-wrap align-items-center">
+                        <!-- Chart -->
+                        <div class="flex-grow-1">
+                            <canvas id="chart-pie-question-<?= $question['id_question'] ?>"></canvas>
+                        </div>
+                        <!-- Legend langsung di kanan chart -->
+                        <div class="ml-4">
+                            <ul id="question-legend-<?= $question['id_question'] ?>" class="list-unstyled"></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
 </div>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const colors = ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384']; // Warna untuk chart
+
+        // Fungsi untuk membuat legend
+        function generateLegendHTML(labels, data, colors) {
+            return labels.map((label, index) => `
+                <li>
+                    <span style="background-color: ${colors[index]}; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></span>
+                    ${label}: ${data[index]} orang
+                </li>
+            `).join('');
+        }
+
         // Chart Kepuasan
-        var ctxSatisfaction = document.getElementById('chart-pie-satisfaction').getContext('2d');
-        var satisfactionCounts = <?= json_encode($satisfactionCounts) ?>;
+        const ctxSatisfaction = document.getElementById('chart-pie-satisfaction').getContext('2d');
+        const satisfactionCounts = <?= json_encode($satisfactionCounts) ?>;
+
+        const satisfactionLabels = ['Sangat Puas', 'Puas', 'Kurang Puas', 'Tidak Puas'];
+        const satisfactionData = [
+            satisfactionCounts.sangat_puas,
+            satisfactionCounts.puas,
+            satisfactionCounts.kurang_puas,
+            satisfactionCounts.tidak_puas
+        ];
+
+        document.getElementById('satisfaction-legend').innerHTML = generateLegendHTML(satisfactionLabels, satisfactionData, colors);
 
         new Chart(ctxSatisfaction, {
             type: 'pie',
             data: {
-                labels: ['Sangat Puas', 'Puas', 'Kurang Puas', 'Tidak Puas'],
+                labels: satisfactionLabels,
                 datasets: [{
-                    label: 'Jumlah',
-                    data: [satisfactionCounts.sangat_puas, satisfactionCounts.puas, satisfactionCounts.kurang_puas, satisfactionCounts.tidak_puas],
-                    backgroundColor: ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384'],
+                    data: satisfactionData,
+                    backgroundColor: colors
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan legend bawaan
+                    }
+                }
             }
         });
 
-        // Chart Jenis Kelamin
-        var ctxGender = document.getElementById('chart-pie-gender').getContext('2d');
-        var genderCounts = <?= json_encode($genderCounts) ?>;
+        // Loop untuk setiap pertanyaan
+        <?php foreach ($questionCounts as $question) : ?>
+            const ctxQuestion<?= $question['id_question'] ?> = document.getElementById('chart-pie-question-<?= $question['id_question'] ?>').getContext('2d');
+            const questionCounts<?= $question['id_question'] ?> = <?= json_encode($question) ?>;
 
-        var genderLabels = [];
-        var genderData = [];
-
-        genderCounts.forEach(function(item) {
-            genderLabels.push(item.JK == 1 ? 'Laki-Laki' : 'Perempuan');
-            genderData.push(item.count);
-        });
-
-        new Chart(ctxGender, {
-            type: 'pie',
-            data: {
-                labels: genderLabels,
-                datasets: [{
-                    label: 'Jumlah Responden',
-                    data: genderData,
-                    backgroundColor: ['#36a2eb', '#ff6384'],
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    });
-</script>
-
-<?php foreach ($questionCounts as $question) : ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var ctxQuestion<?= $question['id_question'] ?> = document.getElementById('chart-pie-question-<?= $question['id_question'] ?>').getContext('2d');
-            var questionCounts<?= $question['id_question'] ?> = <?= json_encode($question) ?>; // Mengambil data jumlah jawaban untuk pertanyaan tertentu
-
-            var questionLabels<?= $question['id_question'] ?> = [
+            const questionLabels<?= $question['id_question'] ?> = [
                 '<?= $question['option1_name'] ?>',
                 '<?= $question['option2_name'] ?>',
                 '<?= $question['option3_name'] ?>',
                 '<?= $question['option4_name'] ?>'
             ];
-            var questionData<?= $question['id_question'] ?> = [
+            const questionData<?= $question['id_question'] ?> = [
                 questionCounts<?= $question['id_question'] ?>['count_option1'],
                 questionCounts<?= $question['id_question'] ?>['count_option2'],
                 questionCounts<?= $question['id_question'] ?>['count_option3'],
                 questionCounts<?= $question['id_question'] ?>['count_option4']
             ];
 
+            document.getElementById('question-legend-<?= $question['id_question'] ?>').innerHTML = generateLegendHTML(questionLabels<?= $question['id_question'] ?>, questionData<?= $question['id_question'] ?>, colors);
+
             new Chart(ctxQuestion<?= $question['id_question'] ?>, {
                 type: 'pie',
                 data: {
                     labels: questionLabels<?= $question['id_question'] ?>,
                     datasets: [{
-                        label: 'Jumlah',
                         data: questionData<?= $question['id_question'] ?>,
-                        backgroundColor: ['#36a2eb', '#4bc0c0', '#ffcd56', '#ff6384'],
+                        backgroundColor: colors
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // Sembunyikan legend bawaan
+                        }
+                    }
                 }
             });
-        });
-    </script>
-<?php endforeach; ?>
+        <?php endforeach; ?>
+    });
+</script>
 
 <?= $this->endSection(); ?>

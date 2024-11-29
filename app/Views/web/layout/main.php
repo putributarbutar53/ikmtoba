@@ -17,6 +17,7 @@
     <!-- CSS here -->
 
     <link rel="stylesheet" href="<?= base_url() ?>/lapor/css/bootstrap.css">
+    <link href="<?= base_url() ?>assets/lib/raty-js/jquery.raty.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url() ?>/lapor/css/animate.css">
     <link rel="stylesheet" href="<?= base_url() ?>/lapor/css/swiper-bundle.css">
     <link rel="stylesheet" href="<?= base_url() ?>/lapor/css/slick.css">
@@ -158,6 +159,7 @@
     <!-- JS here -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= base_url() ?>/lapor/js/vendors/jquery.js"></script>
+    <script src="<?= base_url() ?>assets/lib/raty-js/jquery.raty.js"></script>
     <script src="<?= base_url() ?>/lapor/js/vendors/waypoints.js"></script>
     <script src="<?= base_url() ?>/lapor/js/bootstrap-bundle.js"></script>
     <script src="<?= base_url() ?>/lapor/js/swiper-bundle.js"></script>
