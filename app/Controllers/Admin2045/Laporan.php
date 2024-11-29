@@ -11,6 +11,7 @@ use CodeIgniter\HTTP\RequestTrait;
 use App\Models\SurveyModel;
 use App\Models\TindakModel;
 use App\Models\TanyaModel;
+use TCPDF;
 
 class Laporan extends BaseController
 {
@@ -210,5 +211,81 @@ class Laporan extends BaseController
         ];
 
         return view('admin/laporan/qst', $data);
+    }
+    public function exportPdf()
+    {
+        // Ambil data dari model
+        $data = $this->model->findAll();
+
+        // Filter data untuk menghilangkan duplikat berdasarkan 'nik' dan 'created_at'
+        $uniqueData = [];
+        foreach ($data as $row) {
+            $key = $row['nik'] . $row['created_at']; // Kombinasi unik nik dan created_at
+            if (!isset($uniqueData[$key])) {
+                $uniqueData[$key] = $row; // Simpan data hanya jika belum ada
+            }
+        }
+        $uniqueData = array_values($uniqueData); // Mengubah associative array menjadi indexed array
+
+        // Membuat instance TCPDF
+        $pdf = new TCPDF('L', 'mm', 'A4', true, 'UTF-8', false); // 'L' untuk landscape
+
+        // Konfigurasi PDF
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Nama Aplikasi');
+        $pdf->SetTitle('Laporan Data Survey');
+        $pdf->SetSubject('Data Survey');
+        $pdf->SetKeywords('TCPDF, PDF, laporan, survey');
+
+        // Set margin
+        $pdf->SetMargins(15, 20, 15);
+        $pdf->SetHeaderMargin(10);
+        $pdf->SetFooterMargin(10);
+
+        // Tambahkan halaman baru
+        $pdf->AddPage();
+
+        // Menambahkan gambar logo
+        $pdf->Image(base_url() . 'assets/img/logo.png', 10, 10, 40, 40, '', '', '', true, 300, '', false, false, 0, 'L', false, false);
+
+        // Judul Laporan
+        $pdf->SetFont('helvetica', 'B', 14); // Ukuran font judul lebih kecil
+        $pdf->Cell(0, 15, 'List Responden Survey Kepuasan Pelayanan', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'Dinas Komunikasi dan Informatika Kabupaten Toba', 0, 1, 'C');
+        $pdf->Ln(10); // Line break
+
+        // Tabel dengan header
+        $pdf->SetFont('helvetica', 'B', 8); // Font lebih kecil untuk tabel
+        $pdf->Cell(10, 7, 'No', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'NIK', 1, 0, 'C');
+        $pdf->Cell(40, 7, 'Nama', 1, 0, 'C');
+        $pdf->Cell(20, 7, 'Jenis Kelamin', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'No. HP', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Pendidikan', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Pekerjaan', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Jenis Layanan', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Tempat Layanan', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Tanggal Dibuat', 1, 1, 'C');
+
+        // Mengatur font untuk data
+        $pdf->SetFont('helvetica', '', 8); // Font lebih kecil untuk data
+
+        // Loop untuk data survey
+        $i = 1;
+        foreach ($uniqueData as $row) {
+            $pdf->Cell(10, 7, $i++, 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['nik'], 1, 0, 'C');
+            $pdf->Cell(40, 7, $row['nama'], 1, 0, 'L');
+            $pdf->Cell(20, 7, $row['jk'] == 'L' ? 'Laki-Laki' : 'Perempuan', 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['no_hp'], 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['pendidikan'], 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['pekerjaan'], 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['jenis_layanan'], 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['tempat_layanan'], 1, 0, 'C');
+            $pdf->Cell(30, 7, $row['created_at'], 1, 1, 'C');
+        }
+
+        // Output PDF ke browser untuk preview
+        $pdf->Output('laporan_survey.pdf', 'D'); // 'I' untuk preview di browser, 'D' untuk download
     }
 }

@@ -14,9 +14,17 @@
 </div>
 
 <div class="card mb-3">
+    <div class="card-header">
+        <div class="row flex-between-center">
+            <div class="col">
+                <a class="btn btn-danger" href="<?php echo site_url('admin2045/laporan/exportPdf') ?>"><i class="fas fa-file-pdf"></i> Export PDF</a>
+            </div>
+        </div>
+    </div>
     <div class="card-body bg-light">
         <div class="row list">
             <div class="col">
+
                 <table id="news_table" width="100%" class="table mb-0 table-striped table-dashboard data-table border-bottom border-200">
                     <thead class="bg-200">
                         <tr>
@@ -28,7 +36,8 @@
                             <th>Pekerjaan</th>
                             <th>Jenis Layanan</th>
                             <th>Tempat Layanan</th>
-                            
+                            <th>Aksi</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -45,9 +54,6 @@
                                     <td><?= $row['pekerjaan'] ?></td>
                                     <td><?= $row['jenis_layanan'] ?></td>
                                     <td><?= $row['tempat_layanan'] ?></td>
-                                    <td>
-                                        
-                                    </td>
                                     <td>
                                         <button onclick="detaildata('<?= $row['nik'] ?>', '<?= $row['created_at'] ?>')" class="btn btn-sm btn-falcon-warning mb-1" title="Lihat Detail"><i class="fas fa-eye"></i></button>&nbsp;
                                         <button onclick="deletedata('<?= $row['nik'] ?>', '<?= $row['created_at'] ?>')" class="btn btn-sm btn-falcon-danger mb-1" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
