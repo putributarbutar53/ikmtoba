@@ -3,23 +3,28 @@
 namespace App\Controllers;
 
 use App\Models\RatingModel;
-use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Controller;
 
-class RatingController extends BaseController
+class RatingController extends Controller
 {
     public function save()
     {
-        $rating = $this->request->getPost('rating');  // Mendapatkan input rating dari request
+        $rating = $this->request->getPost('rating');
 
-        $ratingModel = new RatingModel();
-        $data = [
-            'rating' => $rating  // Ubah 'rating_value' menjadi 'rating' agar sesuai dengan model
-        ];
+        if ($rating) {
+            $ratingModel = new RatingModel();
 
-        if ($ratingModel->save($data)) {
-            return $this->response->setJSON(['status' => 'success']);
-        } else {
-            return $this->response->setJSON(['status' => 'error'], ResponseInterface::HTTP_BAD_REQUEST);
+            $data = [
+                'rating' => $rating,
+            ];
+
+            if ($ratingModel->insert($data)) {
+                return $this->response->setJSON(['status' => 'success']);
+            } else {
+                return $this->response->setJSON(['status' => 'error']);
+            }
         }
+
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid data']);
     }
 }

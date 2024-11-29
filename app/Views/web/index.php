@@ -16,6 +16,68 @@
                                 Hebat.
                             </h1>
                             <p class="tp-slider-5-paragraph">Smart, interactive surveys for measuring public satisfaction</p>
+                           <!-- Rating Section -->
+<div class="rating-container" style="margin-top: 30px;">
+    <div id="star-rating">
+        <span class="fa fa-star star" id="star-1" data-value="1"></span>
+        <span class="fa fa-star star" id="star-2" data-value="2"></span>
+        <span class="fa fa-star star" id="star-3" data-value="3"></span>
+        <span class="fa fa-star star" id="star-4" data-value="4"></span>
+        <span class="fa fa-star star" id="star-5" data-value="5"></span>
+    </div>
+    <p id="rating-result" style="margin-top: 10px;"></p>
+</div>
+
+<!-- CSS Styles -->
+<style>
+    .star {
+        font-size: 24px;
+        color: gray;
+        cursor: pointer;
+    }
+
+    .star.checked {
+        color: gold;
+    }
+</style>
+
+<!-- jQuery for star rating -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle star click event
+        $(".star").on("click", function() {
+            var ratingValue = $(this).data('value');
+            // Set all stars to unchecked
+            $(".star").removeClass("checked");
+            // Set stars up to the clicked one to checked
+            for (var i = 1; i <= ratingValue; i++) {
+                $("#star-" + i).addClass("checked");
+            }
+            // Display selected rating
+            $("#rating-result").text("Anda memberi rating: " + ratingValue);
+
+            // Send the rating to the server using AJAX
+            $.ajax({
+                url: "<?= base_url('RatingController/save') ?>", // Sesuaikan URL dengan route di backend Anda
+                method: "POST",
+                data: { rating: ratingValue },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert("Rating berhasil disimpan!");
+                    } else {
+                        alert("Gagal menyimpan rating.");
+                    }
+                },
+                error: function() {
+                    alert("Terjadi kesalahan. Silakan coba lagi.");
+                }
+            });
+        });
+    });
+</script>
+
+                   
                         </div>
                         <div class="tp-slider-5-btn-box d-inline-flex wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
                             <a class="tp-btn" rel="noreferrer" href="<?= site_url('survey') ?>" target="_blank"><span>Isi Survey&nbsp;<i class="fas fa-clipboard-list"></i>

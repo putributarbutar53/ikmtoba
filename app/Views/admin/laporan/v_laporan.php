@@ -28,8 +28,7 @@
                             <th>Pekerjaan</th>
                             <th>Jenis Layanan</th>
                             <th>Tempat Layanan</th>
-                            <th>Hasil Survei</th>
-                            <th>#</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -47,25 +46,7 @@
                                     <td><?= $row['jenis_layanan'] ?></td>
                                     <td><?= $row['tempat_layanan'] ?></td>
                                     <td>
-                                        <?php
-                                        // Cek jika 'hasil_survei' ada dan valid
-                                        if (isset($row['hasil_survei']) && is_numeric($row['hasil_survei'])) {
-                                            $rating = (int)$row['hasil_survei']; // Cast nilai hasil_survei menjadi integer
-                                            if ($rating >= 1 && $rating <= 5) { // Validasi bahwa rating ada di antara 1 sampai 5
-                                                for ($star = 1; $star <= 5; $star++) {
-                                                    if ($star <= $rating) {
-                                                        echo '<i class="fas fa-star text-warning"></i>'; // Bintang penuh
-                                                    } else {
-                                                        echo '<i class="far fa-star text-warning"></i>'; // Bintang kosong
-                                                    }
-                                                }
-                                            } else {
-                                                echo 'Rating tidak valid'; // Jika rating tidak valid
-                                            }
-                                        } else {
-                                            echo 'Belum ada rating'; // Jika tidak ada hasil survei
-                                        }
-                                        ?>
+                                        
                                     </td>
                                     <td>
                                         <button onclick="detaildata('<?= $row['nik'] ?>', '<?= $row['created_at'] ?>')" class="btn btn-sm btn-falcon-warning mb-1" title="Lihat Detail"><i class="fas fa-eye"></i></button>&nbsp;

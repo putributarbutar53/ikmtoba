@@ -107,66 +107,7 @@
                         </div>
                     </div>
 
-                    <!-- Rating Section -->
-                    <div class="rating-container" style="margin-top: 30px;">
-                        <div id="star-rating">
-                            <span class="fa fa-star star" id="star-1" data-value="1"></span>
-                            <span class="fa fa-star star" id="star-2" data-value="2"></span>
-                            <span class="fa fa-star star" id="star-3" data-value="3"></span>
-                            <span class="fa fa-star star" id="star-4" data-value="4"></span>
-                            <span class="fa fa-star star" id="star-5" data-value="5"></span>
-                        </div>
-                        <p id="rating-result" style="margin-top: 10px;"></p>
-                    </div>
-
-                    <!-- CSS Styles -->
-                    <style>
-                        .star {
-                            font-size: 24px; /* Adjust the size as needed */
-                            color: gray; /* Default color for stars */
-                            cursor: pointer; /* Change cursor to pointer on hover */
-                        }
-
-                        .star.checked {
-                            color: gold; /* Color when star is checked */
-                        }
-                    </style>
-
-                    <!-- jQuery for star rating -->
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            // Handle star click event
-                            $(".star").on("click", function() {
-                                var ratingValue = $(this).data('value');
-                                // Set all stars to unchecked
-                                $(".star").removeClass("checked");
-                                // Set stars up to the clicked one to checked
-                                for (var i = 1; i <= ratingValue; i++) {
-                                    $("#star-" + i).addClass("checked");
-                                }
-                                // Display selected rating
-                                $("#rating-result").text("Anda memberi rating: " + ratingValue);
-
-                                // Send the rating to the server using AJAX
-                                $.ajax({
-                                    url: "<?= base_url('ratingcontroller/save') ?>",
-                                    method: "POST",
-                                    data: { rating: ratingValue },
-                                    success: function(response) {
-                                        if (response.status === 'success') {
-                                            alert("Rating berhasil disimpan!");
-                                        } else {
-                                            alert("Gagal menyimpan rating.");
-                                        }
-                                    },
-                                    error: function() {
-                                        alert("Terjadi kesalahan. Silakan coba lagi.");
-                                    }
-                                });
-                            });
-                        });
-                    </script>
+                   
                 </div>
             </div>
         </div>

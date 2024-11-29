@@ -6,9 +6,7 @@ use CodeIgniter\Model;
 
 class RatingModel extends Model
 {
-    protected $table = 'ratings';
+    protected $table = 'ratings'; // Nama tabel di database
     protected $primaryKey = 'id';
-    protected $allowedFields = ['rating'];
-    protected $useTimestamps = true;
-    protected $createdField = 'created_at';
+    protected $allowedFields = ['rating']; // Kolom yang diizinkan untuk diisi
 }
