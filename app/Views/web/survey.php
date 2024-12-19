@@ -124,8 +124,8 @@
     <div class="container">
         <div class="row">
             <div class="tp-section-title-wrapper mb-45 text-center wow fadeInUp">
-                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Pelayanan Diskominfo Tobagi (SKP)</h3>
-                <p class="tp-team-section-paragraph">SKP ini menjadi indikator untuk melihat kepuasan Pelayanan dalam menerima layanan Pemerintah Kabupaten Toba</p>
+                <h3 class="tp-section-title tp-about-inr-title">Kuisioner Survey Kepuasan Masyarakat (SKM)</h3>
+                <p class="tp-team-section-paragraph">SKM ini menjadi indikator untuk melihat kepuasan masyarakat dalam menerima layanan Pemerintah Kabupaten Toba</p>
             </div>
         </div>
         <div class="row">
@@ -260,7 +260,61 @@
                                                     <button class="tp-btn" type="reset">
                                                         <span> <i class="fas fa-undo"></i>&nbsp;&nbsp;Reset</span>
                                                     </button>
-                                              
-        
+
+                                                </div>
+                                                <p class="ajax-response"></p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tp-team-thumb-shape">
+                                <img src="<?= base_url() ?>/lapor/img/team/team-img-shape.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team area end -->
+
+<?php $this->endSection() ?>
+<?php $this->section('script') ?>
+
+<script>
+    $(document).ready(function() {
+        $('#skm_submit').submit(function(e) {
+            e.preventDefault();
+            var form = $(this)[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                type: "post",
+                url: "<?= site_url('home/submitskm') ?>",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#skm_submit')[0].reset();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Terimakasih!',
+                        text: 'Terimakasih atas partisipasi anda'
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat menyimpan data'
+                    });
+                }
+            });
+        });
+    });
 </script>
 <?php $this->endSection() ?>
